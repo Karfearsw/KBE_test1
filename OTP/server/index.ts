@@ -173,10 +173,13 @@ const startServer = async () => {
     // Initialize all services
     await initializeServices();
     
-    // Start server
-    server.listen(config.port, config.host, () => {
+    // Start server (Render/hosting friendly: bind to process.env.PORT and 0.0.0.0)
+    const port = parseInt(process.env.PORT || String(config.port), 10);
+    const host = process.env.HOST || '0.0.0.0';
+
+    server.listen(port, host, () => {
       if (process.env.NODE_ENV !== 'production') {
-        console.log(`🚀 Server running on http://${config.host}:${config.port}`);
+        console.log(`🚀 Server running on http://${host}:${port}`);
         console.log(`📊 Environment: ${config.env}`);
         console.log(`🔒 CORS enabled for: ${config.cors.origin}`);
         console.log(`📧 Email verification: ${config.features.emailVerification ? 'enabled' : 'disabled'}`);
