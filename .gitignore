@@ -1,0 +1,10 @@
+# Environment files (prevent committing secrets)
+.env
+.env.*
+**/.env
+**/.env.*
+OTP/.env
+
+# Local logs and uploads
+logs/
+uploads/
